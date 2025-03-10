@@ -1,0 +1,5 @@
+{
+    "port": 8080,
+    "mongoURI": "mongodb://production_db/course_management",
+    "jwtSecret": "production_secret_key"
+  }
