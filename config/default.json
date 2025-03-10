@@ -1,0 +1,5 @@
+{
+    "port": 3000,
+    "mongoURI": "mongodb://localhost:27017/course_management",
+    "jwtSecret": "223455667777777777777777777"
+  }
