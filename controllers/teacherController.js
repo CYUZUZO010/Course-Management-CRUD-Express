@@ -38,13 +38,18 @@ exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
     const teacher = await Teacher.findOne({ username }).populate('role');
-
     if (!teacher || !await bcrypt.compare(password, teacher.password)) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
-
     const token = jwt.sign({ id: teacher._id }, config.get('jwtSecret'), { expiresIn: '1h' });
-    res.json({ token, role: teacher.role.name });
+    // Set token in a cookie
+    res.cookie('token', token, {
+      httpOnly: true,  // Prevents client-side JS from accessing the cookie
+      secure: process.env.NODE_ENV === 'production',  // Use secure cookies in production
+      sameSite: 'strict',  // Helps against CSRF attacks
+      maxAge: 60 * 60 * 1000  // Cookie expiration time (1 hour)
+    });
+    res.status(200).json({ message: 'Login successful', role: teacher.role.name });
   } catch (error) {
     debug(error);
     res.status(500).json({ message: 'Server error' });
