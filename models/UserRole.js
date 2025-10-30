@@ -16,7 +16,7 @@ const userRoleSchema = new mongoose.Schema({
     trim: true
   }
 }, {
-  timestamps: true, // Add createdAt and updatedAt
+  timestamps: true, // Add createdAt and updatedAt dates
   toJSON: { virtuals: true },
   toObject: { virtuals: true }
 });
