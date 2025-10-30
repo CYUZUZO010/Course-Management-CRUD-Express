@@ -23,8 +23,8 @@ const courseSchema = new mongoose.Schema({
   toObject: { virtuals: true }
 });
 
-// Remove these explicit index definitions as unique: true already creates the index
+
 // courseSchema.index({ courseCode: 1 });
-// courseSchema.index({ teacher: 1 });
+// courseSchema.index({ teacher: 1 })
 
 module.exports = mongoose.model('Course', courseSchema);
